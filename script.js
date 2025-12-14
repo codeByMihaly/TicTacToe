@@ -107,15 +107,15 @@ const gameController = (function() {
     }
 
        
-       function resetGame() {
+       function resetRound() {
           gameBoard.reset();
           gameOver = false;
-          playerPresent = "x"
-      
-      
+          playerPresent = "x"     
         }
 
-    return {checkWinner, checkDraw, playRound, getCurrentPlayer, resetGame};
+    
+
+    return {checkWinner, checkDraw, playRound, getCurrentPlayer, resetRound};
 })();
 
 const displayController = (function(){
@@ -123,11 +123,16 @@ const displayController = (function(){
       let restartRoundBtn = document.getElementById("btnNewRound");
       let restartGameBtn = document.getElementById("btnRestartGame");
       let score = document.getElementById("score");
-      let player1 = document.getElementById("player1");
-      let player2 = document.getElementById("player2");
+      let player1 = document.getElementById("player1Score");
+      let player2 = document.getElementById("player2Score");
+      let player1Score = 0;
+      let player2Score = 0;
+      let roundOver = false;
 
       gameCells.forEach((cell, index) => {
         cell.addEventListener("click", () => {
+          if (roundOver) return;
+
           const board = gameBoard.getBoard().flat();
           if(board[index] !== null) {
             score.textContent = `This cell is already occupied by ${board[index].toUpperCase()}! Try another.`
@@ -140,6 +145,8 @@ const displayController = (function(){
       }) 
       
 
+
+
       function updateDisplay() {
       
        const board = gameBoard.getBoard().flat();
@@ -147,30 +154,43 @@ const displayController = (function(){
           cell.textContent = board[i] ? board[i].toUpperCase(): ""
         })
         const winner = gameController.checkWinner();
-        for (let scoreNum = 0; scoreNum < 5; scoreNum++) {
+    
         if(winner === "x") {
-        score.textContent = `Winner is Player1`;
-        scoreNum++
-        player1.textContent = "Player1: " + scoreNum;
-        return;
-        
-       
+          player1Score++;
+          score.textContent = `Winner is Player1`;
+          player1.textContent = player1Score;
+          roundOver = true;
         } else if (winner === "0") {
+          player2Score++;
           score.textContent = "Winner is Player2"
+          player2.textContent = player2Score;
+          roundOver = true;
         } else if (gameController.checkDraw()) {
           score.textContent = "It's a draw!";
-        }
+          roundOver = true;
         }
       }
+
         function restartRound() {
-          gameController.resetGame();
+          gameController.resetRound();
           updateDisplay();
           score.textContent = "New round has started!"
+          roundOver = false;
         }
 
-
+        function restartGame() {
+          gameController.resetRound();
+          player1Score = 0;
+          player2Score = 0;
+          player1.textContent = player1Score;
+          player2.textContent = player2Score;
+          updateDisplay();
+          score.textContent = "New game has started!"     
+          roundOver = false;   
+        }
 
       restartRoundBtn.addEventListener("click", restartRound);
+      restartGameBtn.addEventListener("click", restartGame);
 
     updateDisplay();
 })();

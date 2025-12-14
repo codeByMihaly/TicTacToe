@@ -19,8 +19,6 @@ body {
 }
 
 #gameboard {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,12 +52,21 @@ body {
   background-color: #ffffff88;
 }
 
+.addName {
+  border: 1px solid red;
+}
+
 #scoreboard {
   display: flex;
+  justify-content: space-between;
   margin-top: 1em;
   font-size: 2rem;
   color: rgb(218, 141, 201);
-  gap: 5em;
+  gap: 2em;
+}
+
+.playerScore {
+  margin-left: -1.5em;
 }
 
 .score {
