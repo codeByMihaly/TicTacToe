@@ -1,3 +1,7 @@
+/* Everything is in border-box to easier put elements where I want.
+   The border is at 0 margin.
+*/
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -6,6 +10,8 @@ body {
   margin: 0;
   background-color: white;
 }
+
+/* ------- Header section ------- */
 
 #h1 {
   display: flex;
@@ -17,6 +23,48 @@ body {
   font-size: 2.5rem;
   background-color: rgb(218, 141, 201);
 }
+
+ /* ------- Add name section ------- */
+
+.addName {
+  text-align: left;
+  color: rgb(218, 141, 201);
+  font-size: 2rem;
+  margin-bottom: 2.5em;
+}
+
+#name1 {
+  display: flex;
+  margin: 0.5em 0em;
+}
+
+#name2 {
+  display: flex;
+  margin: 0.5em 0em;
+}
+
+input {
+  font-size: 2rem;
+  color: rgb(218, 141, 201); 
+  border: 1px solid rgb(218, 141, 201);
+}
+
+#nameSet {
+  font-size: 2rem;
+  background-color: rgb(218, 141, 201);
+  padding: 0.5em 1em;
+  cursor: pointer
+}
+
+#nameSet:hover {
+  background-color: rgb(218, 141, 201, 0.8);
+}
+
+#nameSet:active {
+  background-color: rgb(218, 141, 201, 0.6);
+}
+
+/* ------- Game section with cells ------- */
 
 #gameboard {
   display: flex;
@@ -52,9 +100,7 @@ body {
   background-color: #ffffff88;
 }
 
-.addName {
-  border: 1px solid red;
-}
+/* ------- Scoreboard section ------- */
 
 #scoreboard {
   display: flex;
@@ -69,14 +115,14 @@ body {
   margin-left: -1.5em;
 }
 
+/* ------- What happened at the game section ------- */
+
 .score {
   font-size: 2rem;
   color: rgb(218, 141, 201);
 }
 
-.btns {
-  display:flex;
-}
+/* ------- Buttons section at the below ------- */
 
 .button {
   font-size: 2rem;

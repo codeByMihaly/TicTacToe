@@ -1,5 +1,10 @@
+// Game Logic
+
+/* --------Board--------*/
 const gameBoard = (function() {
 
+
+    // Board itself
     let board = [
         [null, null, null],
         [null, null, null],
@@ -35,10 +40,14 @@ const gameBoard = (function() {
     return {getBoard, setMove, reset};
 })();
 
+
+/* --------Game logic about how to win, who comes--------*/
 const gameController = (function() {
 
         let playerPresent = "x";
         let gameOver = false;
+
+        // Which player comes next
 
         function switchPlayer() {
             if (playerPresent === "x") {
@@ -53,6 +62,8 @@ const gameController = (function() {
         function getCurrentPlayer() {
           return playerPresent;
         }
+
+        // What patters is winnable
 
         function checkWinner() {
 
@@ -75,7 +86,7 @@ const gameController = (function() {
              return null;
         }
 
-        
+        // If its a draw
         function checkDraw() {
                  let game = gameBoard.getBoard().flat();
                  return !game.includes(null);
@@ -118,20 +129,28 @@ const gameController = (function() {
     return {checkWinner, checkDraw, playRound, getCurrentPlayer, resetRound};
 })();
 
+
+                    /* --------UI--------*/
 const displayController = (function(){
       let gameCells = document.querySelectorAll(".gameCells");
       let restartRoundBtn = document.getElementById("btnNewRound");
       let restartGameBtn = document.getElementById("btnRestartGame");
       let score = document.getElementById("score");
+      let playerNameChange1 = document.getElementById("player1");
+      let playerNameChange2 = document.getElementById("player2");
       let player1 = document.getElementById("player1Score");
       let player2 = document.getElementById("player2Score");
       let player1Score = 0;
       let player2Score = 0;
       let roundOver = false;
+      let inputPlayer1 = document.getElementById("name1");
+      let inputPlayer2 = document.getElementById("name2");
 
       gameCells.forEach((cell, index) => {
         cell.addEventListener("click", () => {
           if (roundOver) return;
+
+          // The already selected cells
 
           const board = gameBoard.getBoard().flat();
           if(board[index] !== null) {
@@ -144,7 +163,18 @@ const displayController = (function(){
         })
       }) 
       
+      // Name settings
+      const form = document.querySelector('form');
 
+          function nameChange (e) {
+          e.preventDefault();
+          playerNameChange1.textContent = inputPlayer1.value + ":";
+          playerNameChange2.textContent = inputPlayer2.value + ":";
+          inputPlayer1.value = "";
+          inputPlayer2.value = "";
+      }
+
+      form.addEventListener("submit", nameChange);
 
 
       function updateDisplay() {
@@ -155,14 +185,16 @@ const displayController = (function(){
         })
         const winner = gameController.checkWinner();
     
+        // Score
+
         if(winner === "x") {
           player1Score++;
-          score.textContent = `Winner is Player1`;
+          score.textContent = `Winner is ${playerNameChange1.textContent.replace(/:$/, "")}`;
           player1.textContent = player1Score;
           roundOver = true;
         } else if (winner === "0") {
           player2Score++;
-          score.textContent = "Winner is Player2"
+          score.textContent = `Winner is ${playerNameChange2.textContent.replace(/:$/, "")}`;
           player2.textContent = player2Score;
           roundOver = true;
         } else if (gameController.checkDraw()) {
@@ -171,6 +203,8 @@ const displayController = (function(){
         }
       }
 
+        // Restart ROUND!!!
+
         function restartRound() {
           gameController.resetRound();
           updateDisplay();
@@ -178,12 +212,16 @@ const displayController = (function(){
           roundOver = false;
         }
 
+         // Restart the entire GAME!!!
+
         function restartGame() {
           gameController.resetRound();
           player1Score = 0;
           player2Score = 0;
           player1.textContent = player1Score;
           player2.textContent = player2Score;
+          playerNameChange1.textContent = "Player1:"
+          playerNameChange2.textContent = "Player2:"
           updateDisplay();
           score.textContent = "New game has started!"     
           roundOver = false;   
