@@ -176,7 +176,6 @@ const displayController = (function(){
 
       form.addEventListener("submit", nameChange);
 
-
       function updateDisplay() {
       
        const board = gameBoard.getBoard().flat();
