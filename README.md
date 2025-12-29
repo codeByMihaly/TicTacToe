@@ -4,6 +4,8 @@
 - A simple Tic Tac Toe game built with JavaScript, HTML, and CSS.
 - Players can enter their names, play multiple rounds, and keep track of scores. The game supports restarting a single round or resetting the entire game.
 
+**LIVE DEMO:**  https://codebymihaly.github.io/TicTacToe/
+
 **Features**
 - Two‑player Tic Tac Toe (X vs O).
 
@@ -58,3 +60,8 @@
 - Highlight winning combination.
 
 - Mobile‑friendly enhancements.
+
+**Screenshot:**
+<img width="2526" height="1337" alt="img1" src="https://github.com/user-attachments/assets/a60f1bac-9a9f-4cbf-a9b9-6f831bfc8ea4" />
+
+
