@@ -1,4 +1,4 @@
-**Tic Tac Toe Game 🎮**
+**Tic Tac Toe Game**
 
 **Overview**
 - A simple Tic Tac Toe game built with JavaScript, HTML, and CSS.
@@ -32,7 +32,7 @@
 
 - Use Restart Game to reset everything.
 
-**Technologies Used**
+**What I used**
 - HTML5 for structure
 
 - CSS3 for styling
